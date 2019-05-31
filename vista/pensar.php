@@ -1,6 +1,6 @@
 <?php 
 	error_reporting(0);
-	$controlador = new controladorPensador();
+	$controlador = new ControladorPensador();
 
 	//si no recibe nada por post inicializa variables llama funcion para generar el primer numero
 	if(!isset($_POST['darPistas'])){
@@ -10,6 +10,7 @@
 		echo "<h1><center>";
 		$controlador->mostrarRandom();
 		echo "</center></h1>";
+		$adivinado=0;
 
 	}else{
 		//si recibe por post ejecuta el codigo
@@ -19,9 +20,9 @@
 
 			//si recibe los 4 numeros bien significa que acerto el numero completo
 			if($_SESSION['aDatos']['numeroBien']==4 and $_SESSION['aDatos']['numeroRegular']==0){
-
+				$adivinado=1;
 				echo'<div class="alert alert-success fade in container">
-						<strong>LO LOGRE!!</strong>  <br>	Ingresa Otro Numero.
+						<strong>LO LOGRE!!</strong>  <br>	Jugemos Otra Vez.
 					</div>';	
 
 			}else{
@@ -54,12 +55,17 @@
 		echo $_SESSION['indice']; ?></h3>
 	</center>
 	
-
-	<form action="" method="POST">
-		<input  class="form-control" type="text" name="txt_num_bien" placeholder="Cantidad de numeros bien" pattern="[0-4]*" title="Solo numeros del 0 al 4" required>
-		<br>
-		<input class="form-control" type="text" name="txt_num_regular" placeholder="Cantidad de numeros regulares" pattern="[0-4]*" title="Solo numeros del 0 al 4" required></input>
-		<br><br>
-		<button  class="btn btn-success" type="submit" name="darPistas">DAR PISTAS</button>
-	</form>
+	<?php if($adivinado==0){ ?>
+		<form action="" method="POST">
+			<input  class="form-control" type="text" name="txt_num_bien" placeholder="Cantidad de numeros bien" pattern="[0-4]*" maxlength="1" title="Solo numeros del 0 al 4" required autofocus>
+			<br>
+			<input class="form-control" type="text" name="txt_num_regular" placeholder="Cantidad de numeros regulares" pattern="[0-4]*" maxlength="1" title="Solo numeros del 0 al 4" required></input>
+			<br><br>
+			<button  class="btn btn-success" type="submit" name="darPistas">DAR PISTAS</button>
+		</form>
+	<?php }else{?>
+			<div class="container">
+				<a class="btn btn-success" href="?cargar=pensar" title="">NUEVO JUEGO</a>
+			</div>
+		<?php } ?>
 </div>

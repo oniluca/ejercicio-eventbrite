@@ -5,19 +5,18 @@ class Adivinador{
 
 	private $numero;
 	private $random;
-
+//recibe paramentros y setea variables
 	public function set($atributo, $contenido){
 		$this->$atributo = $contenido;
 	}
-	
+//divide el numero para poder comparar por digito 
 	public function parser(){
 
 		$parseado=str_split($_SESSION['aDatos']['numero']);
 		return $parseado;
 	}
-
+//genera numero aleatorio distinto de cero y que no repita digitos
 	public function random(){
-
 		$num1=0;
 		$num2=0;
 		$num3=0;
@@ -41,7 +40,12 @@ class Adivinador{
 		}
 
 	}
-	
+
+	public function mostrarRandom(){
+		$resultado=implode($_SESSION['aDatos']['random']);
+		return $resultado;
+	}
+//compara el numero generaddo por ramdon y el numero ingresado por el usuario
 	public function comparar ($parseado){
 		$bien=0;
 		$regular=0;

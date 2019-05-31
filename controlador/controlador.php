@@ -2,7 +2,7 @@
 	include_once('modelo/adivinador.php');
 	include_once("modelo/pensador.php");
 
- class controladorAdivinador{
+ class ControladorAdivinador{
 
  	private $numero;
 	private $adivinador;
@@ -15,6 +15,11 @@
 		if($_SESSION['aDatos']['randomActivo']==0){
 			$random=$this->adivinador->random();
 		}
+	}
+
+	public function mostrarRandom(){
+		$resultado=$this->adivinador->mostrarRandom();
+		return $resultado;
 	}
 
 	public function comparar ($numero){
@@ -30,7 +35,7 @@
 
 
 
- class controladorPensador{
+ class ControladorPensador{
 
  	private $pensador;
 

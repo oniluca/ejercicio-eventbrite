@@ -8,7 +8,7 @@ class Pensador{
 		$_SESSION['nuevoNumero']=$num;
 	}
 
-	//recorre y muestra el array del numero randon generado
+	//muestra el numero randon generado
 	public function mostrarRandom(){
 		echo $_SESSION['nuevoNumero'];
 	}
@@ -17,18 +17,17 @@ class Pensador{
 	public function nuevoNumero($variable){
 		$_SESSION['nuevoNumero']=$variable+1;
 		if($variable>9999){
-			$this->random(1);
+			$this->random();
 		}
 	}
 
 	//divide un numero cadena en numeros individuales
 	public function parser($valor){
-
 		$parseado=str_split($valor);		
 		return $parseado;
 	}
 
-
+//compara numero viejo con el nuevo numero para adivinar el numero pensado
 	public function adivinarNumero(){
 		$x=0;
 		$this->nuevoNumero($_SESSION['nuevoNumero']);

@@ -1,5 +1,5 @@
 <?php 
-	$controlador= new controladorAdivinador();
+	$controlador= new ControladorAdivinador();
 
 if(!isset($_POST["adivinar"])){
 	$_SESSION['aDatos'] = array();
@@ -31,9 +31,10 @@ if(!isset($_POST["adivinar"])){
 					</div>';	
 
 			}else{ if($_SESSION['aDatos']['contadorIntentos']==3){
+					$resultado=$controlador->mostrarRandom();
 					echo'<div class="alert alert-danger fade in container">
-						<strong>JUEGO TERMINADO</strong>  <br>	Jugar Otra Vez.
-					</div>';	
+						<strong>JUEGO TERMINADO</strong>  <br> El numero era:'.$resultado.'<br>	Jugar Otra Vez.
+					</div>';
 					}
 				}
 				$_SESSION['aDatos']['contadorIntentos']++;
@@ -49,14 +50,14 @@ if(!isset($_POST["adivinar"])){
 <div class="container">
 	<form action="" method="POST">
 			
-			<input  class="form-control" type="text" name="txt_num" placeholder="Ingrese un numero de 4 cifras" pattern="[0-9]*" title="Solo numeros" required></input>
+			<input  class="form-control" type="text" name="txt_num" placeholder="Ingrese un numero de 4 cifras" pattern="[0-9]*" maxlength="4" title="Solo numeros,maximo cuatro caracteres" required autofocus></input>
 			<br><br>
 			<button  class="btn btn-success" type="submit" name="adivinar">Adivinar</button>
 			
 	</form>
 	<?php }else{ ?>
 			<div class="container">
-			<a class="btn btn-success" href="index.php" title="">NUEVO JUEGO</a>
+			<a class="btn btn-success" href="?cargar=adivinar" title="">NUEVO JUEGO</a>
 			</div>
 			<?php } ?>
 </div>
